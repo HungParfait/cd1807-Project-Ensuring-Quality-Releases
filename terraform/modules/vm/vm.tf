@@ -12,18 +12,15 @@ resource "azurerm_network_interface" "" {
 }
 
 resource "azurerm_linux_virtual_machine" "" {
-  name                = ""
-  location            = ""
-  resource_group_name = ""
-  size                = "Standard_DS2_v2"
-  admin_username      = ""
+  name                  = ""
+  location              = ""
+  resource_group_name   = ""
+  size                  = "Standard_DS2_v2"
+  admin_username        = var.admin_username
+  admin_password        = var.admin_password
   network_interface_ids = []
-  admin_ssh_key {
-    username   = ""
-    public_key = "file("~/.ssh/id_rsa.pub")"
-  }
   os_disk {
-    caching           = "ReadWrite"
+    caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
   }
   source_image_reference {

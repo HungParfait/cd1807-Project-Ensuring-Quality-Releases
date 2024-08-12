@@ -10,7 +10,12 @@ variable "resource_group" {}
 variable "application_type" {}
 
 # Network
-variable virtual_network_name {}
-variable address_prefix_test {}
-variable address_space {}
+variable "virtual_network_name" {}
+variable "address_prefix_test" {}
+variable "address_space" {}
 
+#Azurerm
+variable "access_key" {}
+variable "storage_account_name" {}
+variable "container_name" {}
+variable "key" {}
