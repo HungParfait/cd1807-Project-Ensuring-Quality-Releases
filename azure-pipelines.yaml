@@ -20,6 +20,7 @@ variables:
   environmentName: "Dev"
   #Project Name
   projectName: "cd1807-Project-Ensuring-Quality-Releases"
+  system.debug: true
 stages:
   #--------------------------------------------#
   # BUILD STAGE
