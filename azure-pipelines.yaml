@@ -86,11 +86,7 @@ stages:
               provider: 'azurerm'
               command: 'plan'
               workingDirectory: '$(System.DefaultWorkingDirectory)/environments/test'
-              backendServiceArm: "$(azureServiceConnectionId)"
-              backendAzureRmResourceGroupName: "Azuredevops"
-              backendAzureRmStorageAccountName: "hungndsa"
-              backendAzureRmContainerName: "terraform"
-              backendAzureRmKey: "test.terraform.tfstate.plan"
+              environmentServiceNameAzureRM: "$(azureServiceConnectionId)"
 
           # Run Terraform Apply
           - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV3@3
