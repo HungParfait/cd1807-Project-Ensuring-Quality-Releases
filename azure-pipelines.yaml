@@ -86,7 +86,6 @@ stages:
               provider: 'azurerm'
               command: 'plan'
               workingDirectory: '$(System.DefaultWorkingDirectory)/environments/test'
-              environmentServiceNameAzureRM: "$(azureServiceConnectionId)"
               backendServiceArm: "$(azureServiceConnectionId)"
               backendAzureRmResourceGroupName: "Azuredevops"
               backendAzureRmStorageAccountName: "hungndsa"
