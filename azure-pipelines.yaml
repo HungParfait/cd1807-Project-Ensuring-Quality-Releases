@@ -181,6 +181,31 @@ stages:
             displayName: "Upload Package WebApp"
             artifact: drop-fakerestapi
 
+          # Postman Data Validation Test Suite
+          # ToDo: Verify the working directory - Done
+          - task: CmdLine@2
+            displayName: Run Data Validation Tests
+            continueOnError: true
+            inputs:
+              script: "newman run Validation_Test.postman_collection.json -e Test.postman_environment.json --reporters cli,junit --reporter-junit-export TEST-DataValidation.xml"
+              workingDirectory: "$(System.DefaultWorkingDirectory)/automatedtesting/postman"
+          # Postman Regression Test Suite
+          # ToDo: Verify the working directory - Done
+          - task: CmdLine@2
+            displayName: Run Regression Tests
+            continueOnError: true
+            inputs:
+              script: "newman run Regression_Test.postman_collection.json -e Test.postman_environment.json --reporters cli,junit --reporter-junit-export TEST-Regression.xml"
+              workingDirectory: "$(System.DefaultWorkingDirectory)/automatedtesting/postman"
+          # Postman - Publish Results
+          # ToDo: Complete the task as explained here: https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/test/publish-test-results?view=azure-devops&tabs=trx%2Cyaml#yaml-snippet
+          - task: PublishTestResults@2
+            inputs:
+              testResultsFormat: "JUnit"
+              testResultsFiles: "**/TEST-*.xml"
+              searchFolder: "$(System.DefaultWorkingDirectory)/automatedtesting/postman" # ToDo - Done
+              mergeTestResults: true
+              testRunTitle: "Testing" # ToDo - Done
           #--------------------------------------------#
           # JMeter (Performance) Test Suite - Archive
           # ToDo: Complete the ArchiveFiles@2 task and publish step
