@@ -1,7 +1,7 @@
 # Azure subscription vars
-subscription_id = "fe543d6c-d65a-4f94-99e0-886fb95f57dd"
-client_id       = "db954935-3f52-4017-9870-6b015e913e76"
-client_secret   = "J3I8Q~t4Q0PjPpvRPmGQPE3HjTIBMGG~dYGrPb9E"
+subscription_id = "e2c7cd99-c3c5-4a90-9109-02e7d50f8311"
+client_id       = "68827f7e-16c5-49e8-b538-eade821e9155"
+client_secret   = "Tdz8Q~J3WVwHiSNQnaqaTRm9H5H.agp7iUnNwcP2"
 tenant_id       = "f958e84a-92b8-439f-a62d-4f45996b6d07"
 
 # Resource Group/Location
@@ -17,4 +17,4 @@ address_prefix_test  = "10.5.1.0/24"
 storage_account_name = "hungndsa"
 container_name       = "terraform"
 key                  = "test.terraform.tfstate"
-access_key           = "E6VAscDkblMhKm4B2G7mVcxfQ/zy9OoAdpBiMUaClE2vMCFUNLSsaSK47S7q0eeaqFDu3GhxxWdB+ASt3wbffQ=="
+access_key           = "pBQCsQlG/slFgFrdxZMFID7TW1Y5k57i1nqP28q4u8kH22Qon8GIqiW3d69Ccu8wA8btuPKwS5NC+AStQQjU+w=="

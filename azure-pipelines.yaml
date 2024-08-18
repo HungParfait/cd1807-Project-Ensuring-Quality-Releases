@@ -126,6 +126,18 @@ stages:
               mergeTestResults: true
               testRunTitle: "Testing" # ToDo - Done
 
+          - task: DownloadSecureFile@1
+            name: secure_file
+            displayName: Download terraform.tfvars
+            inputs:
+              secureFile: 'terraform.tfvars'
+
+          - task: Bash@3
+            displayName: Copy terraform.tfvars
+            inputs:
+              targetType: 'inline'
+              script: cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/environments/test/terraform
+
           #--------------------------------------------#
           # Selenium (UI) Test Suite - Archive the package
           # "ArchiveFiles@2" picks up the web package and archives it.
