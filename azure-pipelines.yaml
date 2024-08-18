@@ -268,11 +268,11 @@ stages:
                 # ToDo: Complete the task as explained here: https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/test/publish-test-results?view=azure-devops&tabs=trx%2Cyaml#yaml-snippet
                 - task: PublishTestResults@2
                   inputs:
-                  testResultsFormat: "JUnit"
-                  testResultsFiles: "**/TEST-*.xml"
-                  searchFolder: $(Pipeline.Workspace)/drop-postman-tests # ToDo - Done
-                  mergeTestResults: true
-                  testRunTitle: "Testing" # ToDo - Done
+                    testResultsFormat: "JUnit"
+                    testResultsFiles: "**/TEST-*.xml"
+                    searchFolder: $(Pipeline.Workspace)/drop-postman-tests # ToDo - Done
+                    mergeTestResults: true
+                    testRunTitle: "Testing" # ToDo - Done
       #--------------------------------------------#
       # Selenium | Functional UI Tests
       # ToDo:
