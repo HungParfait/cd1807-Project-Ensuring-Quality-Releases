@@ -109,6 +109,9 @@ stages:
           #     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
           #     environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
 
+          - task: NodeTaskRunnerInstaller@0
+            inputs:
+              nodeVersion: '16'
           #--------------------------------------------#
           # Postman - Install Newman
           # ToDo: Update the command and verify the working directory - Done
