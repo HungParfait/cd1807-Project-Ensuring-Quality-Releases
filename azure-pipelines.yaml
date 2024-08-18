@@ -109,47 +109,31 @@ stages:
           #     workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
           #     environmentServiceNameAzureRM: '$(azureServiceConnectionId)'
 
-          - task: NodeTaskRunnerInstaller@0
-            inputs:
-              nodeVersion: '16'
-          #--------------------------------------------#
-          # Postman - Install Newman
-          # ToDo: Update the command and verify the working directory - Done
-          - task: CmdLine@2
-            displayName: Install Newman
-            inputs:
-              script: "sudo npm install -g newman"
-              workingDirectory: $(System.DefaultWorkingDirectory)
-          - task: CmdLine@2
-            displayName: check Newman
-            inputs:
-              script: ls $(System.DefaultWorkingDirectory)/automatedtesting
-              workingDirectory: $(System.DefaultWorkingDirectory)
-          # Postman Data Validation Test Suite
-          # ToDo: Verify the working directory - Done
-          - task: CmdLine@2
-            displayName: Run Data Validation Tests
-            continueOnError: true
-            inputs:
-              script: "newman run Validation_Test.postman_collection.json -e Test.postman_environment.json --reporters cli,junit --reporter-junit-export TEST-DataValidation.xml"
-              workingDirectory: "$(System.DefaultWorkingDirectory)/automatedtesting/postman"
-          # Postman Regression Test Suite
-          # ToDo: Verify the working directory - Done
-          - task: CmdLine@2
-            displayName: Run Regression Tests
-            continueOnError: true
-            inputs:
-              script: "newman run Regression_Test.postman_collection.json -e Test.postman_environment.json --reporters cli,junit --reporter-junit-export TEST-Regression.xml"
-              workingDirectory: "$(System.DefaultWorkingDirectory)/automatedtesting/postman"
-          # Postman - Publish Results
-          # ToDo: Complete the task as explained here: https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/test/publish-test-results?view=azure-devops&tabs=trx%2Cyaml#yaml-snippet
-          - task: PublishTestResults@2
-            inputs:
-              testResultsFormat: "JUnit"
-              testResultsFiles: "**/TEST-*.xml"
-              searchFolder: "$(System.DefaultWorkingDirectory)/automatedtesting/postman" # ToDo - Done
-              mergeTestResults: true
-              testRunTitle: "Testing" # ToDo - Done
+#          # Postman Data Validation Test Suite
+#          # ToDo: Verify the working directory - Done
+#          - task: CmdLine@2
+#            displayName: Run Data Validation Tests
+#            continueOnError: true
+#            inputs:
+#              script: "newman run Validation_Test.postman_collection.json -e Test.postman_environment.json --reporters cli,junit --reporter-junit-export TEST-DataValidation.xml"
+#              workingDirectory: "$(System.DefaultWorkingDirectory)/automatedtesting/postman"
+#          # Postman Regression Test Suite
+#          # ToDo: Verify the working directory - Done
+#          - task: CmdLine@2
+#            displayName: Run Regression Tests
+#            continueOnError: true
+#            inputs:
+#              script: "newman run Regression_Test.postman_collection.json -e Test.postman_environment.json --reporters cli,junit --reporter-junit-export TEST-Regression.xml"
+#              workingDirectory: "$(System.DefaultWorkingDirectory)/automatedtesting/postman"
+#          # Postman - Publish Results
+#          # ToDo: Complete the task as explained here: https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/test/publish-test-results?view=azure-devops&tabs=trx%2Cyaml#yaml-snippet
+#          - task: PublishTestResults@2
+#            inputs:
+#              testResultsFormat: "JUnit"
+#              testResultsFiles: "**/TEST-*.xml"
+#              searchFolder: "$(System.DefaultWorkingDirectory)/automatedtesting/postman" # ToDo - Done
+#              mergeTestResults: true
+#              testRunTitle: "Testing" # ToDo - Done
 
           
           #--------------------------------------------#
@@ -181,31 +165,6 @@ stages:
             displayName: "Upload Package WebApp"
             artifact: drop-fakerestapi
 
-          # Postman Data Validation Test Suite
-          # ToDo: Verify the working directory - Done
-          - task: CmdLine@2
-            displayName: Run Data Validation Tests
-            continueOnError: true
-            inputs:
-              script: "newman run Validation_Test.postman_collection.json -e Test.postman_environment.json --reporters cli,junit --reporter-junit-export TEST-DataValidation.xml"
-              workingDirectory: "$(System.DefaultWorkingDirectory)/automatedtesting/postman"
-          # Postman Regression Test Suite
-          # ToDo: Verify the working directory - Done
-          - task: CmdLine@2
-            displayName: Run Regression Tests
-            continueOnError: true
-            inputs:
-              script: "newman run Regression_Test.postman_collection.json -e Test.postman_environment.json --reporters cli,junit --reporter-junit-export TEST-Regression.xml"
-              workingDirectory: "$(System.DefaultWorkingDirectory)/automatedtesting/postman"
-          # Postman - Publish Results
-          # ToDo: Complete the task as explained here: https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/test/publish-test-results?view=azure-devops&tabs=trx%2Cyaml#yaml-snippet
-          - task: PublishTestResults@2
-            inputs:
-              testResultsFormat: "JUnit"
-              testResultsFiles: "**/TEST-*.xml"
-              searchFolder: "$(System.DefaultWorkingDirectory)/automatedtesting/postman" # ToDo - Done
-              mergeTestResults: true
-              testRunTitle: "Testing" # ToDo - Done
           #--------------------------------------------#
           # JMeter (Performance) Test Suite - Archive
           # ToDo: Complete the ArchiveFiles@2 task and publish step
@@ -220,6 +179,21 @@ stages:
           - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-perftests.zip
             displayName: "Upload Package"
             artifact: drop-perftests
+
+          #--------------------------------------------#
+          # Postman Testing (Performance) Test Suite - Archive
+          # ToDo: Complete the ArchiveFiles@2 task and publish step
+          - task: ArchiveFiles@2
+            displayName: "Archive PostmanTestSuite"
+            inputs:
+              rootFolderOrFile: "$(System.DefaultWorkingDirectory)/automatedtesting/postman"
+              includeRootFolder: false
+              archiveType: "zip"
+              archiveFile: "$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-postman-tests.zip"
+          # JMeter Test Suite - Publish
+          - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-postman-tests.zip
+            displayName: "Upload Package"
+            artifact: drop-postman-tests
 
   #--------------------------------------------#
   # DEPLOYMENT STAGE
@@ -245,6 +219,10 @@ stages:
                     package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip # ToDo: Use the published zip artifact. - Done
                 #--------------------------------------------#
                 # Run JMeter test suite against the App Service
+
+                - download: current
+                  artifact: drop-perftests # ToDo: Change/provide a name - Done
+
                 - task: CmdLine@2
                   inputs:
                     script: |
@@ -254,8 +232,47 @@ stages:
                       ./apache-jmeter-5.2.1/bin/jmeter -n -t Endurance_Test.jmx -j jmeter.log -f
                       ./apache-jmeter-5.2.1/bin/jmeter -n -t Stress_Test.jmx -j jmeter.log -f
                       cat jmeter.log                                                                           # ToDo: Write your commands
-                    workingDirectory: $(Pipeline.Workspace)/drop-perftests/$(Build.BuildId)-perftests.zip # ToDo: Use the artifact name from the task above - Done
+                    workingDirectory: $(Pipeline.Workspace)/drop-perftests # ToDo: Use the artifact name from the task above - Done
 
+                - download: current
+                  artifact: drop-postman-tests # ToDo: Change/provide a name - Done
+
+                #--------------------------------------------#
+                # Postman - Install Newman
+                # ToDo: Update the command and verify the working directory - Done
+                - task: CmdLine@2
+                  displayName: Install Newman
+                  inputs:
+                    script: "sudo npm install -g newman"
+                    workingDirectory: $(Pipeline.Workspace)/drop-postman-tests
+
+                # Postman Data Validation Test Suite
+                # ToDo: Verify the working directory - Done
+                - task: CmdLine@2
+                  displayName: Run Data Validation Tests
+                  continueOnError: true
+                  inputs:
+                    script: "newman run Validation_Test.postman_collection.json -e Test.postman_environment.json --reporters cli,junit --reporter-junit-export TEST-DataValidation.xml"
+                    workingDirectory: $(Pipeline.Workspace)/drop-postman-tests
+
+                # Postman Regression Test Suite
+                # ToDo: Verify the working directory - Done
+                - task: CmdLine@2
+                  displayName: Run Regression Tests
+                  continueOnError: true
+                  inputs:
+                    script: "newman run Regression_Test.postman_collection.json -e Test.postman_environment.json --reporters cli,junit --reporter-junit-export TEST-Regression.xml"
+                    workingDirectory: $(Pipeline.Workspace)/drop-postman-tests
+
+                # Postman - Publish Results
+                # ToDo: Complete the task as explained here: https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/test/publish-test-results?view=azure-devops&tabs=trx%2Cyaml#yaml-snippet
+                - task: PublishTestResults@2
+                  inputs:
+                  testResultsFormat: "JUnit"
+                  testResultsFiles: "**/TEST-*.xml"
+                  searchFolder: $(Pipeline.Workspace)/drop-postman-tests # ToDo - Done
+                  mergeTestResults: true
+                  testRunTitle: "Testing" # ToDo - Done
       #--------------------------------------------#
       # Selenium | Functional UI Tests
       # ToDo:
