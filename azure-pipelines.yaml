@@ -232,8 +232,8 @@ stages:
                       wget https://dlcdn.apache.org/jmeter/source/apache-jmeter-5.6.3_src.zip
                       unzip apache-jmeter-5.6.3_src.zip
                       unzip -o $(Build.BuildId)-perftests.zip
-                      ./apache-jmeter-5.6.3_src/bin/jmeter.sh -n -t ./test-suite/Endurance_Test.jmx -j jmeter.log -f
-                      ./apache-jmeter-5.6.3_src/bin/jmeter.sh -n -t ./test-suite/Stress_Test.jmx -j jmeter.log -f
+                      ./apache-jmeter-5.6.3_src/bin/jmeter.sh -n -t ./test-suite/Endurance_Test.jmx -j jmeter-endurance.log -f -l log/jmeter/endurance-test-result.csv -e -f -o log/jmeter/endurance-test-html-report 
+                      ./apache-jmeter-5.6.3_src/bin/jmeter.sh -n -t ./test-suite/Stress_Test.jmx -j jmeter-stress.log -l log/jmeter/stress-test-result.csv -e -f -o log/jmeter/stress-test-html-report 
                       cat jmeter.log                                                                           # ToDo: Write your commands
                     workingDirectory: $(Pipeline.Workspace)/drop-perftests # ToDo: Use the artifact name from the task above - Done
 
