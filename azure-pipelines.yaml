@@ -78,12 +78,6 @@ stages:
             displayName: Copy terraform.tfvars
             inputs:
               targetType: 'inline'
-              script: ls $(System.DefaultWorkingDirectory)
-
-          - task: Bash@3
-            displayName: Copy terraform.tfvars
-            inputs:
-              targetType: 'inline'
               script: cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform/environments/test
 
           - task: TerraformTaskV1@0
@@ -93,11 +87,11 @@ stages:
               command: 'plan'
               workingDirectory: '$(System.DefaultWorkingDirectory)/environments/test'
               environmentServiceNameAzureRM: "$(azureServiceConnectionId)"
-              # backendServiceArm: "$(azureServiceConnectionId)"
-              # backendAzureRmResourceGroupName: "Azuredevops"
-              # backendAzureRmStorageAccountName: "hungndsa"
-              # backendAzureRmContainerName: "terraform"
-              # backendAzureRmKey: "test.terraform.tfstate.plan"
+               backendServiceArm: "$(azureServiceConnectionId)"
+               backendAzureRmResourceGroupName: "Azuredevops"
+               backendAzureRmStorageAccountName: "hungndsa"
+               backendAzureRmContainerName: "terraform"
+               backendAzureRmKey: "test.terraform.tfstate.plan"
 
           # Run Terraform Apply
           - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV3@3
