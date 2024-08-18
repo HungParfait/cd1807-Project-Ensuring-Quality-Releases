@@ -229,8 +229,8 @@ stages:
                 - task: CmdLine@2
                   inputs:
                     script: |
-                      wget "https://apache.mirrors.lucidnetworks.net//jmeter/binaries/apache-jmeter-5.2.1.tgz"
-                      tar -xf apache-jmeter-5.2.1.tgz
+                      wget https://dlcdn.apache.org/jmeter/binaries/apache-jmeter-5.4.1.zip
+                      unzip apache-jmeter-5.4.1.zip
                       unzip -o $(Build.BuildId)-perftests.zip
                       ./apache-jmeter-5.2.1/bin/jmeter -n -t Endurance_Test.jmx -j jmeter.log -f
                       ./apache-jmeter-5.2.1/bin/jmeter -n -t Stress_Test.jmx -j jmeter.log -f
@@ -247,6 +247,13 @@ stages:
                   displayName: Install Newman
                   inputs:
                     script: "sudo npm install -g newman"
+                    workingDirectory: $(Pipeline.Workspace)/drop-postman-tests
+
+                - task: CmdLine@2
+                  displayName: Install Newman
+                  inputs:
+                    script: |
+                      unzip -o $(Build.BuildId)-postman-tests.zip
                     workingDirectory: $(Pipeline.Workspace)/drop-postman-tests
 
                 # Postman Data Validation Test Suite
