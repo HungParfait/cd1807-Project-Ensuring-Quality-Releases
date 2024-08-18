@@ -84,7 +84,7 @@ stages:
             displayName: Copy terraform.tfvars
             inputs:
               targetType: 'inline'
-              script: cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/environments/test
+              script: cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/terraform/environments/test
 
           - task: TerraformTaskV1@0
             displayName: Terraform Plan
