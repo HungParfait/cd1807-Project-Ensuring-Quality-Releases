@@ -85,11 +85,11 @@ stages:
             inputs:
               provider: 'azurerm'
               command: 'plan'
-              workingDirectory: '$(System.DefaultWorkingDirectory)/environments/test'
+              workingDirectory: '$(System.DefaultWorkingDirectory)/terraform/environments/test'
               environmentServiceNameAzureRM: "MyConnection"
 
           # Run Terraform Apply
-          - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV3@3
+          - task: TerraformTaskV3@3
             displayName: Terraform apply
             inputs:
               provider: "azurerm"
