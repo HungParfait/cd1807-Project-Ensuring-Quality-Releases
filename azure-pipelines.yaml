@@ -56,6 +56,7 @@ stages:
             inputs:
               provider: "azurerm"
               command: "validate"
+              workingDirectory: "$(System.DefaultWorkingDirectory)/terraform/environments/test"
 
           # OPTIONAL - This step is needed only if your Terraform VM uses an SSH key pair for login and you want your pipeline agent to connect to it.
           # Generate an SSH key pair in your local/AZ Cloud shell. Use the public key in the Terraform VM module.
@@ -67,11 +68,30 @@ stages:
           #     sshPublicKey: 'PUBLIC_KEY'            # variable value
           #     sshKeySecureFile: 'id_rsa' # Use secure file feature in the pipeline library UI to save the "id_rsa" file, as mentioned here: https://learn.microsoft.com/en-us/azure/devops/pipelines/library/secure-files?view=azure-devops#add-a-secure-file
 
-          # - task: DownloadSecureFile@1
-          #  name: udacity_public_key
-          #  displayName:
-          #  inputs:
-          #   secureFile:
+          - task: DownloadSecureFile@1
+            name: secure_file
+            displayName: Download terraform.tfvars
+            inputs:
+              secureFile: 'terraform.tfvars'
+
+          - task: Bash@3
+            displayName: Copy terraform.tfvars
+            inputs:
+              targetType: 'inline'
+              script: cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/environments/test
+
+          - task: TerraformTaskV1@0
+            displayName: Terraform Plan
+            inputs:
+              provider: 'azurerm'
+              command: 'plan'
+              workingDirectory: '$(System.DefaultWorkingDirectory)/environments/test'
+              environmentServiceNameAzureRM: "$(azureServiceConnectionId)"
+              # backendServiceArm: "$(azureServiceConnectionId)"
+              # backendAzureRmResourceGroupName: "Azuredevops"
+              # backendAzureRmStorageAccountName: "hungndsa"
+              # backendAzureRmContainerName: "terraform"
+              # backendAzureRmKey: "test.terraform.tfstate.plan"
 
           # Run Terraform Apply
           - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV3@3
@@ -126,18 +146,7 @@ stages:
               mergeTestResults: true
               testRunTitle: "Testing" # ToDo - Done
 
-          - task: DownloadSecureFile@1
-            name: secure_file
-            displayName: Download terraform.tfvars
-            inputs:
-              secureFile: 'terraform.tfvars'
-
-          - task: Bash@3
-            displayName: Copy terraform.tfvars
-            inputs:
-              targetType: 'inline'
-              script: cp $(Agent.TempDirectory)/terraform.tfvars $(System.DefaultWorkingDirectory)/environments/test/terraform
-
+          
           #--------------------------------------------#
           # Selenium (UI) Test Suite - Archive the package
           # "ArchiveFiles@2" picks up the web package and archives it.
