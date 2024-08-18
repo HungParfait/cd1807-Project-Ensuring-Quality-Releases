@@ -19,7 +19,7 @@ variables:
   # Environment name
   environmentName: "Dev"
   #Project Name
-  app.name: "hungnd-v1"
+  app.name: "webAppLinux-AppService"
   system.log: true
 stages:
   #--------------------------------------------#
