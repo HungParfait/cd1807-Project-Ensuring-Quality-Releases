@@ -86,7 +86,7 @@ stages:
               provider: 'azurerm'
               command: 'plan'
               workingDirectory: '$(System.DefaultWorkingDirectory)/environments/test'
-              environmentServiceNameAzureRM: "$(azureServiceConnectionId)"
+              environmentServiceNameAzureRM: "MyConnection"
 
           # Run Terraform Apply
           - task: ms-devlabs.custom-terraform-tasks.custom-terraform-release-task.TerraformTaskV3@3
