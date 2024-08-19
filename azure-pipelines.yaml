@@ -246,11 +246,11 @@ stages:
                 - task: CmdLine@2
                   displayName: Install Newman
                   inputs:
-                    script: "sudo npm install -g newman"
+                    script: "npm install -g newman"
                     workingDirectory: $(Pipeline.Workspace)/drop-postman-tests
 
                 - task: CmdLine@2
-                  displayName: Install Newman
+                  displayName: "Unzip Postman Test"
                   inputs:
                     script: |
                       unzip -o $(Build.BuildId)-postman-tests.zip
