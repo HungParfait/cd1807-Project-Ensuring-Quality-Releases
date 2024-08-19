@@ -288,10 +288,7 @@ stages:
       # ToDo:
       - deployment: VMDeploy
         displayName: Selenium Tests
-        environment:
-          name: $(environmentName)
-          resourceType: VirtualMachine
-          tags: selenium
+        environment: $(environmentName)
         strategy:
           runOnce:
             deploy:
