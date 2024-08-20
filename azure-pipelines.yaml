@@ -227,13 +227,10 @@ stages:
                 - download: current
                   artifact: drop-perftests # ToDo: Change/provide a name - Done
 
-                # Java tool installer v0
-                # Acquire a specific version of Java from a user-supplied Azure blob or the tool cache and sets JAVA_HOME.
-                - task: JavaToolInstaller@0
-                  inputs:
-                    versionSpec: '11' # string. Required. JDK version. Default: 8.
-                    jdkArchitectureOption: 'x64' #| 'x86'. Required. JDK architecture.
-                    jdkSourceOption: 'PreInstalled' #| 'LocalDirectory' | 'AzureStorage'. Required. JDK source.
+                - script: |
+                    sudo apt-get update
+                    sudo apt-get install -y open-jdk-11-jdk
+                  displayName: Install Java 11
 
                 - task: CmdLine@2
                   inputs:
