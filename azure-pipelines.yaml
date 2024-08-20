@@ -229,7 +229,7 @@ stages:
 
                 - script: |
                     sudo apt-get update
-                    sudo apt-get install -y open-jdk-11-jdk
+                    sudo apt-get install -y default-jre 
                   displayName: Install Java 11
 
                 - task: CmdLine@2
