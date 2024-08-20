@@ -229,7 +229,7 @@ stages:
 
                 - script: |
                     sudo apt-get update
-                    sudo apt-get install -y default-jre 
+                    sudo apt-get install -y default-jre
                   displayName: Install Java 11
 
                 - task: CmdLine@2
@@ -307,10 +307,9 @@ stages:
       # ToDo:
       - deployment: VMDeploy
         displayName: Selenium Tests
-        environment:
-          name: $(environmentName)
-          tags: dev
-          resourceType: "VirtualMachine"
+        environment: $(environmentName)
+#          tags: dev
+#          resourceType: "VirtualMachine"
         strategy:
           runOnce:
             deploy:
