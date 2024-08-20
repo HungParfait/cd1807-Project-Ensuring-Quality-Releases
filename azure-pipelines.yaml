@@ -220,6 +220,7 @@ stages:
                     appName: "$(app.name)" # ToDo - Done
                     appType: webApp
                     package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip # ToDo: Use the published zip artifact. - Done
+                    deploymentMethod: 'auto'
                 #--------------------------------------------#
                 # Run JMeter test suite against the App Service
 
@@ -301,10 +302,10 @@ stages:
       # ToDo:
       - deployment: VMDeploy
         displayName: Selenium Tests
-        environment: 
-          name: $(environmentName)
-          tags: dev
-          resourceType: "VirtualMachine"
+        environment: $(environmentName)
+#          name: $(environmentName)
+#          tags: dev
+#          resourceType: "VirtualMachine"
         strategy:
           runOnce:
             deploy:
