@@ -230,7 +230,7 @@ stages:
                   inputs:
                     script: |
                       curl -O https://dlcdn.apache.org/jmeter/binaries/apache-jmeter-5.6.3.zip
-                      unzip apache-jmeter-5.6.3.zip
+                      unzip -o apache-jmeter-5.6.3.zip
                       unzip -o $(Build.BuildId)-perftests.zip
                       mkdir -p log/endurance-test-html-report
                       mkdir -p log/stress-test-html-report
