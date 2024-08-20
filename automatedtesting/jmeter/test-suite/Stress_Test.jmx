@@ -55,8 +55,8 @@
         </collectionProp>
       </HeaderManager>
       <hashTree/>
-      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV IDs Source" enabled="true">
-        <stringProp name="filename">/home/vsts/work/1/s/jmeter/genereal_ids.csv</stringProp>
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="IDs" enabled="true">
+        <stringProp name="filename">../data/ids.csv</stringProp>
         <stringProp name="fileEncoding"></stringProp>
         <stringProp name="variableNames">id</stringProp>
         <boolProp name="ignoreFirstLine">false</boolProp>
@@ -67,8 +67,8 @@
         <stringProp name="shareMode">shareMode.all</stringProp>
       </CSVDataSet>
       <hashTree/>
-      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV BookIDs Source" enabled="true">
-        <stringProp name="filename">/home/vsts/work/1/s/jmeter/book_ids.csv</stringProp>
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="BookIDs" enabled="true">
+        <stringProp name="filename">../data/ids.csv</stringProp>
         <stringProp name="fileEncoding"></stringProp>
         <stringProp name="variableNames">bookId</stringProp>
         <boolProp name="ignoreFirstLine">false</boolProp>
@@ -79,8 +79,8 @@
         <stringProp name="shareMode">shareMode.all</stringProp>
       </CSVDataSet>
       <hashTree/>
-      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Book Objs" enabled="true">
-        <stringProp name="filename">/home/vsts/work/1/s/jmeter/objs_books.csv</stringProp>
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Books" enabled="true">
+        <stringProp name="filename">../data/books.csv</stringProp>
         <stringProp name="fileEncoding"></stringProp>
         <stringProp name="variableNames">BookID,BookTitle,BookDescription,BookPageCount,BookExcerpt,BookPublishDate</stringProp>
         <boolProp name="ignoreFirstLine">true</boolProp>
@@ -91,8 +91,8 @@
         <stringProp name="shareMode">shareMode.all</stringProp>
       </CSVDataSet>
       <hashTree/>
-      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Activity Objs" enabled="true">
-        <stringProp name="filename">/home/vsts/work/1/s/jmeter/objs_activity.csv</stringProp>
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Activities" enabled="true">
+        <stringProp name="filename">../data/activities.csv</stringProp>
         <stringProp name="fileEncoding"></stringProp>
         <stringProp name="variableNames">ActivityID,ActivityTitle,ActivityDueDate,ActivityCompleted</stringProp>
         <boolProp name="ignoreFirstLine">true</boolProp>
@@ -103,8 +103,8 @@
         <stringProp name="shareMode">shareMode.all</stringProp>
       </CSVDataSet>
       <hashTree/>
-      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV CoverPhotos Objs" enabled="true">
-        <stringProp name="filename">/home/vsts/work/1/s/jmeter/objs_cover_photos.csv</stringProp>
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CoverPhotos" enabled="true">
+        <stringProp name="filename">../data/cover_photos.csv</stringProp>
         <stringProp name="fileEncoding"></stringProp>
         <stringProp name="variableNames">CoverPhotosID,CoverPhotosIDBook,CoverPhotosUrl</stringProp>
         <boolProp name="ignoreFirstLine">true</boolProp>
@@ -115,8 +115,8 @@
         <stringProp name="shareMode">shareMode.all</stringProp>
       </CSVDataSet>
       <hashTree/>
-      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV User Objs" enabled="true">
-        <stringProp name="filename">/home/vsts/work/1/s/jmeter/objs_users.csv</stringProp>
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Users" enabled="true">
+        <stringProp name="filename">../data/users.csv</stringProp>
         <stringProp name="fileEncoding"></stringProp>
         <stringProp name="variableNames">UserID,UserUserName,UserPassword</stringProp>
         <boolProp name="ignoreFirstLine">true</boolProp>
@@ -127,8 +127,8 @@
         <stringProp name="shareMode">shareMode.all</stringProp>
       </CSVDataSet>
       <hashTree/>
-      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Author Objs" enabled="true">
-        <stringProp name="filename">/home/vsts/work/1/s/jmeter/objs_author.csv</stringProp>
+      <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="Authors" enabled="true">
+        <stringProp name="filename">../data/authors.csv</stringProp>
         <stringProp name="fileEncoding"></stringProp>
         <stringProp name="variableNames">AuthorID,AuthorIDBook,AuthorFirstName,AuthorLastName</stringProp>
         <boolProp name="ignoreFirstLine">true</boolProp>
