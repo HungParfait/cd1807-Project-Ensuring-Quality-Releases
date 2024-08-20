@@ -16,7 +16,7 @@ resource "azurerm_linux_virtual_machine" "VM" {
   location              = var.location
   resource_group_name   = var.resource_group
   size                  = "Standard_DS2_v2"
-  admin_username        = var.admin_username
+  admin_username        = var.admin_user
   admin_password        = var.admin_password
   network_interface_ids = [azurerm_network_interface.NI.id]
   os_disk {
