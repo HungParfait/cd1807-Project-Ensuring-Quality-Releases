@@ -250,7 +250,11 @@ stages:
                 - task: CmdLine@2
                   displayName: Install Newman
                   inputs:
-                    script: "npm install -g newman"
+                    script: |
+                      nvm --version
+                      node --version
+                      npm --version
+                      npm install -g newman
                     workingDirectory: $(Pipeline.Workspace)/drop-postman-tests
 
                 - task: CmdLine@2
@@ -295,7 +299,7 @@ stages:
         environment: 
           name: $(environmentName)
           tags: dev
-          resourceType: "Virtual Machine"
+          resourceType: "VirtualMachine"
         strategy:
           runOnce:
             deploy:
