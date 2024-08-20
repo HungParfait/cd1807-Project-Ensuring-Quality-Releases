@@ -232,6 +232,8 @@ stages:
                       curl -O https://dlcdn.apache.org/jmeter/binaries/apache-jmeter-5.6.3.zip
                       unzip apache-jmeter-5.6.3.zip
                       unzip -o $(Build.BuildId)-perftests.zip
+                      mkdir -p log/endurance-test-html-report
+                      mkdir -p log/stress-test-html-report
                       ./apache-jmeter-5.6.3/bin/jmeter.sh -n -t ./test-suite/Endurance_Test.jmx -j jmeter-endurance.log -l log/endurance-test-result.csv -e -f -o log/endurance-test-html-report 
                       ./apache-jmeter-5.6.3/bin/jmeter.sh -n -t ./test-suite/Stress_Test.jmx -j jmeter-stress.log -l log/stress-test-result.csv -e -f -o log/stress-test-html-report 
                       cat jmeter-endurance.log          
