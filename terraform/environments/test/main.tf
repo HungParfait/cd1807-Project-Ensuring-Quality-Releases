@@ -60,5 +60,5 @@ module "vm" {
   admin_user       = var.admin_user
   admin_password   = var.admin_password
   subnet_id_test   = module.network.subnet_id_test
-  public_ip_address_id = module.public_ip_address_id
+  public_ip_address_id = module.publicip.public_ip_address_id
 }
