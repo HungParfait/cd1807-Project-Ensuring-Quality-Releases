@@ -56,7 +56,6 @@ module "vm" {
   source           = "../../modules/vm"
   location         = var.location
   source_image_id  = var.source_image_id
-  resource_type    = "Virtual Machine"
   resource_group   = module.resource_group.resource_group_name
   admin_user       = var.admin_user
   admin_password   = var.admin_password
