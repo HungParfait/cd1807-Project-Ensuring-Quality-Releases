@@ -22,3 +22,4 @@ variable "container_name" {}
 variable "key" {}
 variable "admin_user" {}
 variable "admin_password" {}
+variable "source_image_id" {}
