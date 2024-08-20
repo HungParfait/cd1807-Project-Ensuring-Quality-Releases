@@ -227,6 +227,14 @@ stages:
                 - download: current
                   artifact: drop-perftests # ToDo: Change/provide a name - Done
 
+                # Java tool installer v0
+                # Acquire a specific version of Java from a user-supplied Azure blob or the tool cache and sets JAVA_HOME.
+                - task: JavaToolInstaller@0
+                  inputs:
+                    versionSpec: '11' # string. Required. JDK version. Default: 8.
+                    jdkArchitectureOption: 'x64' #| 'x86'. Required. JDK architecture.
+                    jdkSourceOption: 'PreInstalled' #| 'LocalDirectory' | 'AzureStorage'. Required. JDK source.
+
                 - task: CmdLine@2
                   inputs:
                     script: |
@@ -302,10 +310,10 @@ stages:
       # ToDo:
       - deployment: VMDeploy
         displayName: Selenium Tests
-        environment: $(environmentName)
-#          name: $(environmentName)
-#          tags: dev
-#          resourceType: "VirtualMachine"
+        environment:
+          name: $(environmentName)
+          tags: dev
+          resourceType: "VirtualMachine"
         strategy:
           runOnce:
             deploy:
