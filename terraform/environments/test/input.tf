@@ -20,3 +20,5 @@ variable "access_key" {}
 variable "storage_account_name" {}
 variable "container_name" {}
 variable "key" {}
+variable "admin_user" {}
+variable "admin_password" {}
