@@ -244,6 +244,11 @@ stages:
                 - download: current
                   artifact: drop-postman-tests # ToDo: Change/provide a name - Done
 
+                - task: UseNode@1
+                  inputs:
+                    versionSpec: '18.x'
+                    displayName: 'Install Node.js'
+                    
                 #--------------------------------------------#
                 # Postman - Install Newman
                 # ToDo: Update the command and verify the working directory - Done
@@ -251,8 +256,8 @@ stages:
                   displayName: Install Newman
                   inputs:
                     script: |
-                      nvm --version
-                      node --version
+                      export $PATH
+                      which npm
                       npm --version
                       npm install -g newman
                     workingDirectory: $(Pipeline.Workspace)/drop-postman-tests
