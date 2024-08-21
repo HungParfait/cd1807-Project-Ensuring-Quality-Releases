@@ -6,7 +6,7 @@ resource "azurerm_service_plan" "test" {
   sku_name            = "F1"
 }
 
-resource "azurerm_app_service" "test" {
+resource "azurerm_windows_web_app" "test" {
   name                = var.application_name
   location            = var.location
   resource_group_name = var.resource_group
@@ -15,5 +15,13 @@ resource "azurerm_app_service" "test" {
     "WEBSITE_RUN_FROM_PACKAGE" = 0
   }
 
-  app_service_plan_id = azurerm_service_plan.test.id
+  site_config {
+    always_on = false
+    application_stack {
+      dotnet_version = "v4.0"
+      current_stack = "dotnet"
+    }
+  }
+
+  service_plan_id = azurerm_service_plan.test.id
 }
