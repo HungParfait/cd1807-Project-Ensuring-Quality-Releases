@@ -24,11 +24,11 @@ resource "azurerm_linux_virtual_machine" "VM" {
     caching              = "ReadWrite"
     storage_account_type = "Standard_LRS"
   }
-  source_image_id = var.source_image_id
-  # source_image_reference {
-  #   publisher = "Canonical"
-  #   offer     = "UbuntuServer"
-  #   sku       = "18.04-LTS"
-  #   version   = "latest"
-  # }
+  # source_image_id = var.source_image_id
+  source_image_reference {
+     publisher = "Canonical"
+     offer     = "UbuntuServer"
+     sku       = "18.04-LTS"
+     version   = "latest"
+  }
 }
