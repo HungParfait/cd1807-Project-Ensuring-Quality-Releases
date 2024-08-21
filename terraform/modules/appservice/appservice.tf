@@ -19,8 +19,8 @@ resource "azurerm_windows_web_app" "test" {
   site_config {
     always_on = false
     application_stack {
-      current_stack = "dotnet"
-      dotnet_version = "v4.0"
+      current_stack = "dotnetcore"
+      dotnet_core_version = "v4.0"
     }
   }
 }
