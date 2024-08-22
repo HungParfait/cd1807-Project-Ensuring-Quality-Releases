@@ -99,44 +99,6 @@ stages:
               workingDirectory: "$(System.DefaultWorkingDirectory)/terraform/environments/test"
               environmentServiceNameAzureRM: "$(azureServiceConnectionId)"
 
-          #          # Run Terraform Applyx
-          #          - task: TerraformTaskV3@3
-          #            displayName: Terraform destroy
-          #            inputs:
-          #              provider: "azurerm"
-          #              command: "destroy"
-          #              commandOptions: '-lock=false'
-          #              workingDirectory: "$(System.DefaultWorkingDirectory)/terraform/environments/test"
-          #              environmentServiceNameAzureRM: "$(azureServiceConnectionId)"
-          #              mark this line
-
-          #          # Postman Data Validation Test Suite
-          #          # ToDo: Verify the working directory - Done
-          #          - task: CmdLine@2
-          #            displayName: Run Data Validation Tests
-          #            continueOnError: true
-          #            inputs:
-          #              script: "newman run Validation_Test.postman_collection.json -e Test.postman_environment.json --reporters cli,junit --reporter-junit-export TEST-DataValidation.xml"
-          #              workingDirectory: "$(System.DefaultWorkingDirectory)/automatedtesting/postman"
-          #          # Postman Regression Test Suite
-          #          # ToDo: Verify the working directory - Done
-          #          - task: CmdLine@2
-          #            displayName: Run Regression Tests
-          #            continueOnError: true
-          #            inputs:
-          #              script: "newman run Regression_Test.postman_collection.json -e Test.postman_environment.json --reporters cli,junit --reporter-junit-export TEST-Regression.xml"
-          #              workingDirectory: "$(System.DefaultWorkingDirectory)/automatedtesting/postman"
-          #          # Postman - Publish Results
-          #          # ToDo: Complete the task as explained here: https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/test/publish-test-results?view=azure-devops&tabs=trx%2Cyaml#yaml-snippet
-          #          - task: PublishTestResults@2
-          #            inputs:
-          #              testResultsFormat: "JUnit"
-          #              testResultsFiles: "**/TEST-*.xml"
-          #              searchFolder: "$(System.DefaultWorkingDirectory)/automatedtesting/postman" # ToDo - Done
-          #              mergeTestResults: true
-          #              testRunTitle: "Testing" # ToDo - Done
-
-
           #--------------------------------------------#
           # Selenium (UI) Test Suite - Archive the package
           # "ArchiveFiles@2" picks up the web package and archives it.
@@ -174,15 +136,7 @@ stages:
 
           #--------------------------------------------#
           # FakeRestAPI - Archive
-          # ToDo: Complete the ArchiveFiles@2 task and publish step
-          #          - task: ArchiveFiles@2
-          #            displayName: "Archive FakeRestAPI"
-          #            inputs:
-          #              rootFolderOrFile: "$(System.DefaultWorkingDirectory)/output"
-          #              includeRootFolder: false
-          #              archiveType: "zip"
-          #              archiveFile: "$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip"
-          #          - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip
+          # ToDo: publish step
           - publish: $(System.DefaultWorkingDirectory)/output/FakeRESTApi.Web.zip
             displayName: "Upload Package WebApp"
             artifact: drop-fakerestapi
@@ -243,17 +197,6 @@ stages:
                     appType: webApp
                     package: $(Pipeline.Workspace)/drop-fakerestapi/FakeRESTApi.Web.zip # ToDo: Use the published zip artifact. - Done
                     deploymentMethod: 'auto'
-                #                     deploymentMethod: 'runFromPackage'
-                #                - task: AzureRmWebAppDeployment@4
-                #                  inputs:
-                #                    ConnectionType: 'AzureRM'
-                #                    azureSubscription: 'MyConnection'
-                #                    appType: 'webApp'
-                #                    WebAppName: '$(app.name)'
-                #                    packageForLinux: '$(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip'
-                #                    enableCustomDeployment: true
-                #                    DeploymentType: 'zipDeploy'
-                #                    TakeAppOfflineFlag: false
 
                 #--------------------------------------------#
                 # Run JMeter test suite against the App Service
@@ -284,10 +227,10 @@ stages:
                 - download: current
                   artifact: drop-postman-tests # ToDo: Change/provide a name - Done
 
-                - task: UseNode@1
+                - task: NodeTool@0
                   inputs:
+                    versionSource: 'spec'
                     versionSpec: '18.x'
-                    displayName: 'Install Node.js'
 
                 #--------------------------------------------#
                 # Postman - Install Newman
@@ -299,6 +242,7 @@ stages:
                       export $PATH
                       which npm
                       npm --version
+                      node --version
                       npm install -g newman
                     workingDirectory: $(Pipeline.Workspace)/drop-postman-tests
 
