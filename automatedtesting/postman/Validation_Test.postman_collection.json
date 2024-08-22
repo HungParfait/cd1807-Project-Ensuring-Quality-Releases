@@ -973,7 +973,7 @@
 	"variable": [
 		{
 			"key": "url",
-			"value": "https://hungnd-v1.azurewebsites.net/api/v1/",
+			"value": "https://hungnd-v2.azurewebsites.net/api/v1/",
 			"type": "string"
 		}
 	]
