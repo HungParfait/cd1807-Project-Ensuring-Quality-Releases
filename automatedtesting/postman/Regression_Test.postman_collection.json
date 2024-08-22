@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "bc1507e8-200e-43e8-bb31-71cb2e610fc4",
+		"_postman_id": "c44bb8bb-33ac-4ed2-9156-03bedb36b505",
 		"name": "Regression_Test",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "17006080"
@@ -180,19 +180,22 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"title\": \"string\",\r\n  \"dueDate\": \"2024-08-22T20:04:01.622Z\",\r\n  \"completed\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{baseUrl}}/Activities?activity=activity123",
+					"raw": "{{baseUrl}}/Activities",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"Activities"
-					],
-					"query": [
-						{
-							"key": "activity",
-							"value": "activity123"
-						}
 					]
 				}
 			},
@@ -217,19 +220,22 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"idBook\": 0,\r\n  \"firstName\": \"string\",\r\n  \"lastName\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{baseUrl}}/Authors?author=authorXyz",
+					"raw": "{{baseUrl}}/Authors",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"Authors"
-					],
-					"query": [
-						{
-							"key": "author",
-							"value": "authorXyz"
-						}
 					]
 				}
 			},
@@ -254,19 +260,22 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"title\": \"string\",\r\n  \"description\": \"string\",\r\n  \"pageCount\": 0,\r\n  \"excerpt\": \"string\",\r\n  \"publishDate\": \"2024-08-22T20:07:44.471Z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{baseUrl}}/Books?book=book1",
+					"raw": "{{baseUrl}}/Books",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"Books"
-					],
-					"query": [
-						{
-							"key": "book",
-							"value": "book1"
-						}
 					]
 				}
 			},
@@ -291,19 +300,22 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"idBook\": 0,\r\n  \"url\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{baseUrl}}/CoverPhotos?coverPhoto=coverPhoto.jpeg",
+					"raw": "{{baseUrl}}/CoverPhotos",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"CoverPhotos"
-					],
-					"query": [
-						{
-							"key": "coverPhoto",
-							"value": "coverPhoto.jpeg"
-						}
 					]
 				}
 			},
@@ -328,19 +340,22 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"userName\": \"string\",\r\n  \"password\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{baseUrl}}/Users?user=user111",
+					"raw": "{{baseUrl}}/Users",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"Users"
-					],
-					"query": [
-						{
-							"key": "user",
-							"value": "user111"
-						}
 					]
 				}
 			},
@@ -525,6 +540,15 @@
 			"request": {
 				"method": "PUT",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"title\": \"string\",\r\n  \"dueDate\": \"2024-08-22T20:04:01.622Z\",\r\n  \"completed\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "{{baseUrl}}/Activities/1?activity=updatedActivity",
 					"host": [
@@ -563,23 +587,23 @@
 			"request": {
 				"method": "PUT",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"idBook\": 0,\r\n  \"firstName\": \"string\",\r\n  \"lastName\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{baseUrl}}/Authors?author=authorKLM&id=1",
+					"raw": "{{baseUrl}}/Authors/1",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
-						"Authors"
-					],
-					"query": [
-						{
-							"key": "author",
-							"value": "authorKLM"
-						},
-						{
-							"key": "id",
-							"value": "1"
-						}
+						"Authors",
+						"1"
 					]
 				}
 			},
@@ -604,23 +628,23 @@
 			"request": {
 				"method": "PUT",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"title\": \"string\",\r\n  \"description\": \"string\",\r\n  \"pageCount\": 0,\r\n  \"excerpt\": \"string\",\r\n  \"publishDate\": \"2024-08-22T20:11:08.107Z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{baseUrl}}/Books?book=book123&id=1",
+					"raw": "{{baseUrl}}/Books/30",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
-						"Books"
-					],
-					"query": [
-						{
-							"key": "book",
-							"value": "book123"
-						},
-						{
-							"key": "id",
-							"value": "1"
-						}
+						"Books",
+						"30"
 					]
 				}
 			},
@@ -645,23 +669,23 @@
 			"request": {
 				"method": "PUT",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"idBook\": 0,\r\n  \"url\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{baseUrl}}/CoverPhotos?coverPhoto=coverPhoto.png&id=1",
+					"raw": "{{baseUrl}}/CoverPhotos/1",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
-						"CoverPhotos"
-					],
-					"query": [
-						{
-							"key": "coverPhoto",
-							"value": "coverPhoto.png"
-						},
-						{
-							"key": "id",
-							"value": "1"
-						}
+						"CoverPhotos",
+						"1"
 					]
 				}
 			},
@@ -686,23 +710,23 @@
 			"request": {
 				"method": "PUT",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"userName\": \"string\",\r\n  \"password\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{baseUrl}}/Users?user=updatedUser&id=1",
+					"raw": "{{baseUrl}}/Users/1",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
-						"Users"
-					],
-					"query": [
-						{
-							"key": "user",
-							"value": "updatedUser"
-						},
-						{
-							"key": "id",
-							"value": "1"
-						}
+						"Users",
+						"1"
 					]
 				}
 			},

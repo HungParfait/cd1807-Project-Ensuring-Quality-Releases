@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "17d23dda-14bd-4d65-a7e5-4a6bf0165c3b",
+		"_postman_id": "23b270c4-4f88-4ff9-82bd-0a82523de244",
 		"name": "Validation_Test",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "17006080"
@@ -17,9 +17,9 @@
 							"",
 							"var expectedActivities = 30;",
 							"",
-							"pm.test(\"Found activities with IDs 1 - \" + expectedActivities, function () {",
+							"pm.test(\"Found activities with ids 1 - \" + expectedActivities, function () {",
 							"    for (i = 0; i < expectedActivities; i++) {",
-							"        pm.expect(jsonData[i].ID).to.eql(i+1);",
+							"        pm.expect(jsonData[i].id).to.eql(i+1);",
 							"    }",
 							"});",
 							"",
@@ -64,9 +64,9 @@
 							"//});",
 							"",
 							"var minimumAuthors = 400;",
-							"pm.test(\"Found authors with IDs 1 - \" + minimumAuthors, function () {",
+							"pm.test(\"Found authors with ids 1 - \" + minimumAuthors, function () {",
 							"    for (i = 0; i < minimumAuthors; i++) {",
-							"        pm.expect(jsonData[i].ID).to.eql(i+1);",
+							"        pm.expect(jsonData[i].id).to.eql(i+1);",
 							"    }",
 							"});",
 							"",
@@ -103,9 +103,9 @@
 							"",
 							"var expectedBooks = 200;",
 							"",
-							"pm.test(\"Found books with IDs 1 - \" + expectedBooks, function () {",
+							"pm.test(\"Found books with ids 1 - \" + expectedBooks, function () {",
 							"    for (i = 0; i < expectedBooks; i++) {",
-							"        pm.expect(jsonData[i].ID).to.eql(i+1);",
+							"        pm.expect(jsonData[i].id).to.eql(i+1);",
 							"    }",
 							"});",
 							"",
@@ -144,9 +144,9 @@
 							"",
 							"var expectedCoverPhotos = 200;",
 							"",
-							"pm.test(\"Found cover photos with IDs 1 - \" + expectedCoverPhotos, function () {",
+							"pm.test(\"Found cover photos with ids 1 - \" + expectedCoverPhotos, function () {",
 							"    for (i = 0; i < expectedCoverPhotos; i++) {",
-							"        pm.expect(jsonData[i].ID).to.eql(i+1);",
+							"        pm.expect(jsonData[i].id).to.eql(i+1);",
 							"    }",
 							"});",
 							"",
@@ -185,9 +185,9 @@
 							"",
 							"var expectedUsers = 10;",
 							"",
-							"pm.test(\"Found users with IDs 1 - \" + expectedUsers, function () {",
+							"pm.test(\"Found users with ids 1 - \" + expectedUsers, function () {",
 							"    for (i = 0; i < expectedUsers; i++) {",
-							"        pm.expect(jsonData[i].ID).to.eql(i+1);",
+							"        pm.expect(jsonData[i].id).to.eql(i+1);",
 							"    }",
 							"});",
 							"",
@@ -222,9 +222,13 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Create activity response body as expected\", function () {",
-							"    pm.response.to.have.body(\"null\");",
-							"});"
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Create successfully\", function () {",
+							"    pm.expect(jsonData.id).not.to.eql(null);",
+							"});",
+							"",
+							""
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -236,7 +240,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"title\": \"string\",\r\n  \"dueDate\": \"2024-08-22T20:04:01.622Z\",\r\n  \"completed\": true\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -244,18 +248,12 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseUrl}}/Activities?activity=activity123",
+					"raw": "{{baseUrl}}/Activities",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"Activities"
-					],
-					"query": [
-						{
-							"key": "activity",
-							"value": "activity123"
-						}
 					]
 				}
 			},
@@ -268,9 +266,13 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Create author response body as expected\", function () {",
-							"    pm.response.to.have.body(\"null\");",
-							"});"
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Create successfully\", function () {",
+							"    pm.expect(jsonData.id).not.to.eql(null);",
+							"});",
+							"",
+							""
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -280,19 +282,22 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"idBook\": 0,\r\n  \"firstName\": \"string\",\r\n  \"lastName\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{baseUrl}}/Authors?author=authorXyz",
+					"raw": "{{baseUrl}}/Authors",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"Authors"
-					],
-					"query": [
-						{
-							"key": "author",
-							"value": "authorXyz"
-						}
 					]
 				}
 			},
@@ -305,9 +310,13 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Create book response body as expected\", function () {",
-							"    pm.response.to.have.body(\"null\");",
-							"});"
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Create successfully\", function () {",
+							"    pm.expect(jsonData.id).not.to.eql(null);",
+							"});",
+							"",
+							""
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -317,19 +326,22 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"title\": \"string\",\r\n  \"description\": \"string\",\r\n  \"pageCount\": 0,\r\n  \"excerpt\": \"string\",\r\n  \"publishDate\": \"2024-08-22T20:07:44.471Z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{baseUrl}}/Books?book=book1",
+					"raw": "{{baseUrl}}/Books",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"Books"
-					],
-					"query": [
-						{
-							"key": "book",
-							"value": "book1"
-						}
 					]
 				}
 			},
@@ -342,9 +354,13 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Create cover photo response body as expected\", function () {",
-							"    pm.response.to.have.body(\"null\");",
-							"});"
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Create successfully\", function () {",
+							"    pm.expect(jsonData.id).not.to.eql(null);",
+							"});",
+							"",
+							""
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -354,19 +370,22 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"idBook\": 0,\r\n  \"url\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{baseUrl}}/CoverPhotos?coverPhoto=coverPhoto.jpeg",
+					"raw": "{{baseUrl}}/CoverPhotos",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"CoverPhotos"
-					],
-					"query": [
-						{
-							"key": "coverPhoto",
-							"value": "coverPhoto.jpeg"
-						}
 					]
 				}
 			},
@@ -379,9 +398,13 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Create user response body as expected\", function () {",
-							"    pm.response.to.have.body(\"null\");",
-							"});"
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Create successfully\", function () {",
+							"    pm.expect(jsonData.id).not.to.eql(null);",
+							"});",
+							"",
+							""
 						],
 						"type": "text/javascript",
 						"packages": {}
@@ -391,6 +414,15 @@
 			"request": {
 				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"userName\": \"string\",\r\n  \"password\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
 					"raw": "{{baseUrl}}/Users?user=user111",
 					"host": [
@@ -418,10 +450,10 @@
 						"exec": [
 							"var jsonData = pm.response.json();",
 							"",
-							"pm.test(\"Activity with ID 1 as expected\", function () {",
-							"    pm.expect(jsonData.ID).to.eql(1);",
-							"    pm.expect(jsonData.Title).to.eql(\"Activity 1\");",
-							"    pm.expect(jsonData.Completed).to.eql(false);",
+							"pm.test(\"Activity with id 1 as expected\", function () {",
+							"    pm.expect(jsonData.id).to.eql(1);",
+							"    pm.expect(jsonData.title).to.eql(\"Activity 1\");",
+							"    pm.expect(jsonData.completed).to.eql(false);",
 							"});",
 							"",
 							""
@@ -456,11 +488,11 @@
 						"exec": [
 							"var jsonData = pm.response.json();",
 							"",
-							"pm.test(\"Author with ID 1 as expected\", function () {",
-							"    pm.expect(jsonData.ID).to.eql(1);",
-							"    pm.expect(jsonData.IDBook).to.eql(1);",
-							"    pm.expect(jsonData.FirstName).to.eql(\"First Name 1\");",
-							"    pm.expect(jsonData.LastName).to.eql(\"Last Name 1\");",
+							"pm.test(\"Author with id 1 as expected\", function () {",
+							"    pm.expect(jsonData.id).to.eql(1);",
+							"    pm.expect(jsonData.idBook).to.eql(1);",
+							"    pm.expect(jsonData.firstName).to.eql(\"First Name 1\");",
+							"    pm.expect(jsonData.lastName).to.eql(\"Last Name 1\");",
 							"});",
 							""
 						],
@@ -494,10 +526,10 @@
 						"exec": [
 							"var jsonData = pm.response.json();",
 							"",
-							"pm.test(\"Book with ID 1 as expected\", function () {",
-							"    pm.expect(jsonData.ID).to.eql(1);",
-							"    pm.expect(jsonData.Title).to.eql(\"Book 1\");",
-							"    pm.expect(jsonData.PageCount).to.eql(100);",
+							"pm.test(\"Book with id 1 as expected\", function () {",
+							"    pm.expect(jsonData.id).to.eql(1);",
+							"    pm.expect(jsonData.title).to.eql(\"Book 1\");",
+							"    pm.expect(jsonData.pageCount).to.eql(100);",
 							"});",
 							""
 						],
@@ -531,10 +563,10 @@
 						"exec": [
 							"var jsonData = pm.response.json();",
 							"",
-							"pm.test(\"Cover Photo with ID 1 as expected\", function () {",
-							"    pm.expect(jsonData.ID).to.eql(1);",
-							"    pm.expect(jsonData.IDBook).to.eql(1);",
-							"    pm.expect(jsonData.Url).to.eql(\"https://placeholdit.imgix.net/~text?txtsize=33&txt=Book 1&w=250&h=350\");",
+							"pm.test(\"Cover Photo with id 1 as expected\", function () {",
+							"    pm.expect(jsonData.id).to.eql(1);",
+							"    pm.expect(jsonData.idBook).to.eql(1);",
+							"    pm.expect(jsonData.url).to.eql(\"https://placeholdit.imgix.net/~text?txtsize=33&txt=Book 1&w=250&h=350\");",
 							"});"
 						],
 						"type": "text/javascript",
@@ -567,10 +599,10 @@
 						"exec": [
 							"var jsonData = pm.response.json();",
 							"",
-							"pm.test(\"User with ID 1 as expected\", function () {",
-							"    pm.expect(jsonData.ID).to.eql(1);",
-							"    pm.expect(jsonData.UserName).to.eql(\"User 1\");",
-							"    pm.expect(jsonData.Password).to.eql(\"Password1\");",
+							"pm.test(\"User with id 1 as expected\", function () {",
+							"    pm.expect(jsonData.id).to.eql(1);",
+							"    pm.expect(jsonData.userName).to.eql(\"User 1\");",
+							"    pm.expect(jsonData.password).to.eql(\"Password1\");",
 							"});",
 							""
 						],
@@ -602,31 +634,39 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Update activity response body as expected\", function () {",
-							"    pm.response.to.have.body(\"null\");",
-							"});"
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Update successfully\", function () {",
+							"    pm.expect(jsonData.id).not.to.eql(null);",
+							"});",
+							"",
+							""
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
 			"request": {
 				"method": "PUT",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"title\": \"string\",\r\n  \"dueDate\": \"2024-08-22T20:04:01.622Z\",\r\n  \"completed\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{baseUrl}}/Activities/1?activity=updatedActivity",
+					"raw": "{{baseUrl}}/Activities/1",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
 						"Activities",
 						"1"
-					],
-					"query": [
-						{
-							"key": "activity",
-							"value": "updatedActivity"
-						}
 					]
 				}
 			},
@@ -639,34 +679,39 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Update author response body as expected\", function () {",
-							"    pm.response.to.have.body(\"null\");",
-							"});"
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Update successfully\", function () {",
+							"    pm.expect(jsonData.id).not.to.eql(null);",
+							"});",
+							"",
+							""
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
 			"request": {
 				"method": "PUT",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"idBook\": 0,\r\n  \"firstName\": \"string\",\r\n  \"lastName\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{baseUrl}}/Authors?author=authorKLM&id=1",
+					"raw": "{{baseUrl}}/Authors/1",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
-						"Authors"
-					],
-					"query": [
-						{
-							"key": "author",
-							"value": "authorKLM"
-						},
-						{
-							"key": "id",
-							"value": "1"
-						}
+						"Authors",
+						"1"
 					]
 				}
 			},
@@ -679,34 +724,39 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Update book response body as expected\", function () {",
-							"    pm.response.to.have.body(\"null\");",
-							"});"
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Update successfully\", function () {",
+							"    pm.expect(jsonData.id).not.to.eql(null);",
+							"});",
+							"",
+							""
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
 			"request": {
 				"method": "PUT",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"title\": \"string\",\r\n  \"description\": \"string\",\r\n  \"pageCount\": 0,\r\n  \"excerpt\": \"string\",\r\n  \"publishDate\": \"2024-08-22T20:11:08.107Z\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{baseUrl}}/Books?book=book123&id=1",
+					"raw": "{{baseUrl}}/Books/1",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
-						"Books"
-					],
-					"query": [
-						{
-							"key": "book",
-							"value": "book123"
-						},
-						{
-							"key": "id",
-							"value": "1"
-						}
+						"Books",
+						"1"
 					]
 				}
 			},
@@ -719,34 +769,39 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Update cover photo response body as expected\", function () {",
-							"    pm.response.to.have.body(\"null\");",
-							"});"
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Update successfully\", function () {",
+							"    pm.expect(jsonData.id).not.to.eql(null);",
+							"});",
+							"",
+							""
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
 			"request": {
 				"method": "PUT",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"idBook\": 0,\r\n  \"url\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{baseUrl}}/CoverPhotos?coverPhoto=coverPhoto.png&id=1",
+					"raw": "{{baseUrl}}/CoverPhotos/1",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
-						"CoverPhotos"
-					],
-					"query": [
-						{
-							"key": "coverPhoto",
-							"value": "coverPhoto.png"
-						},
-						{
-							"key": "id",
-							"value": "1"
-						}
+						"CoverPhotos",
+						"1"
 					]
 				}
 			},
@@ -759,34 +814,39 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							"pm.test(\"Update user response body as expected\", function () {",
-							"    pm.response.to.have.body(\"null\");",
-							"});"
+							"var jsonData = pm.response.json();",
+							"",
+							"pm.test(\"Update successfully\", function () {",
+							"    pm.expect(jsonData.id).not.to.eql(null);",
+							"});",
+							"",
+							""
 						],
-						"type": "text/javascript"
+						"type": "text/javascript",
+						"packages": {}
 					}
 				}
 			],
 			"request": {
 				"method": "PUT",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"userName\": \"string\",\r\n  \"password\": \"string\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "{{baseUrl}}/Users?user=updatedUser&id=1",
+					"raw": "{{baseUrl}}/Users/1",
 					"host": [
 						"{{baseUrl}}"
 					],
 					"path": [
-						"Users"
-					],
-					"query": [
-						{
-							"key": "user",
-							"value": "updatedUser"
-						},
-						{
-							"key": "id",
-							"value": "1"
-						}
+						"Users",
+						"1"
 					]
 				}
 			},
