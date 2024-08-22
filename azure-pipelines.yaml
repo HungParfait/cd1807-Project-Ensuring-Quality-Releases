@@ -152,13 +152,33 @@ stages:
             displayName: "Upload Package Selenium"
             artifact: drop-uitests
 
+          - task: UseDotNet@2
+            inputs:
+              packageType: 'sdk'
+              version: '6.x'
+
+          - task: DotNetCoreCLI@2
+            inputs:
+              command: 'build'
+              projects: '$(System.DefaultWorkingDirectory)/src/FakeRESTApi.sln'
+
+          - script: |
+              mkdir -p $(System.DefaultWorkingDirectory)/output
+            displayName: Create Output Folder
+
+          - task: DotNetCoreCLI@2
+            inputs:
+              command: 'publish'
+              publishWebProjects: true
+              arguments: '--output $(System.DefaultWorkingDirectory)/output'
+
           #--------------------------------------------#
           # FakeRestAPI - Archive
           # ToDo: Complete the ArchiveFiles@2 task and publish step
           - task: ArchiveFiles@2
             displayName: "Archive FakeRestAPI"
             inputs:
-              rootFolderOrFile: "$(System.DefaultWorkingDirectory)/src"
+              rootFolderOrFile: "$(System.DefaultWorkingDirectory)/output"
               includeRootFolder: false
               archiveType: "zip"
               archiveFile: "$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip"
@@ -214,15 +234,6 @@ stages:
                 - download: current
                   artifact: drop-fakerestapi # ToDo: Change/provide a name - Done
 
-                - task: DotNetCoreCLI@2
-                  inputs:
-                    command: 'build'
-
-                - task: DotNetCoreCLI@2
-                  inputs:
-                    command: 'publish'
-                    publishWebProjects: true
-
                 - task: AzureWebApp@1
                   displayName: "Deploy Azure Web App"
                   inputs:
@@ -230,7 +241,7 @@ stages:
                      appName: "$(app.name)" # ToDo - Done
                      appType: webApp
                      package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip # ToDo: Use the published zip artifact. - Done
-#                     deploymentMethod: 'auto'
+                     deploymentMethod: 'auto'
 #                     deploymentMethod: 'runFromPackage'
 #                - task: AzureRmWebAppDeployment@4
 #                  inputs:
