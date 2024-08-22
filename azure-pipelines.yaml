@@ -231,7 +231,7 @@ stages:
                     WebAppName: '$(app.name)'
                     packageForLinux: '$(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip'
                     enableCustomDeployment: true
-                    # DeploymentType: 'zipDeploy'
+                    DeploymentType: 'zipDeploy'
                     TakeAppOfflineFlag: false
 
                 #--------------------------------------------#
