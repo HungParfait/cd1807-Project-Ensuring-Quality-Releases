@@ -12,14 +12,14 @@ resource "azurerm_windows_web_app" "test" {
   resource_group_name = var.resource_group
 
   app_settings = {
-    "WEBSITE_RUN_FROM_PACKAGE" = 0
+    "WEBSITE_RUN_FROM_PACKAGE" = 1
   }
 
   site_config {
     always_on = false
     application_stack {
-      dotnet_version = "v4.0"
-      current_stack = "dotnet"
+      dotnet_version = "v6.0"
+      current_stack = "dotnetcore"
     }
   }
 
