@@ -228,7 +228,7 @@ stages:
                     ConnectionType: 'AzureRM'
                     azureSubscription: 'MyConnection'
                     appType: 'webApp'
-                    WebAppName: 'hungnd-v1'
+                    WebAppName: 'hungnd-v2'
                     packageForLinux: '$(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip'
                     enableCustomDeployment: true
                     DeploymentType: 'zipDeploy'
