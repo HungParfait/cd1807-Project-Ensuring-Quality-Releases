@@ -214,6 +214,11 @@ stages:
                 - download: current
                   artifact: drop-fakerestapi # ToDo: Change/provide a name - Done
 
+                - task: DotNetCoreCLI@2
+                  inputs:
+                    command: 'publish'
+                    publishWebProjects: true
+
                 - task: AzureWebApp@1
                   displayName: "Deploy Azure Web App"
                   inputs:
@@ -221,7 +226,7 @@ stages:
                      appName: "$(app.name)" # ToDo - Done
                      appType: webApp
                      package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip # ToDo: Use the published zip artifact. - Done
-                     deploymentMethod: 'auto'
+#                     deploymentMethod: 'auto'
 #                     deploymentMethod: 'runFromPackage'
 #                - task: AzureRmWebAppDeployment@4
 #                  inputs:
