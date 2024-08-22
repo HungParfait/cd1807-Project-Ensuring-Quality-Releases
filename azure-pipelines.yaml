@@ -241,7 +241,7 @@ stages:
                      azureSubscription: "$(azureServiceConnectionId)" # ToDo - Done
                      appName: "$(app.name)" # ToDo - Done
                      appType: webApp
-                     package: $(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip # ToDo: Use the published zip artifact. - Done
+                     package: $(Pipeline.Workspace)/drop-fakerestapi/FakeRESTApi.Web.zip # ToDo: Use the published zip artifact. - Done
                      deploymentMethod: 'auto'
 #                     deploymentMethod: 'runFromPackage'
 #                - task: AzureRmWebAppDeployment@4
