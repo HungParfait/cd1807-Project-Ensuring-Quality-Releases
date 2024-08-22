@@ -175,14 +175,15 @@ stages:
           #--------------------------------------------#
           # FakeRestAPI - Archive
           # ToDo: Complete the ArchiveFiles@2 task and publish step
-          - task: ArchiveFiles@2
-            displayName: "Archive FakeRestAPI"
-            inputs:
-              rootFolderOrFile: "$(System.DefaultWorkingDirectory)/output"
-              includeRootFolder: false
-              archiveType: "zip"
-              archiveFile: "$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip"
-          - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip
+#          - task: ArchiveFiles@2
+#            displayName: "Archive FakeRestAPI"
+#            inputs:
+#              rootFolderOrFile: "$(System.DefaultWorkingDirectory)/output"
+#              includeRootFolder: false
+#              archiveType: "zip"
+#              archiveFile: "$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip"
+#          - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip
+          - publish: $(System.DefaultWorkingDirectory)/output/FakeRESTApi.Web.zip
             displayName: "Upload Package WebApp"
             artifact: drop-fakerestapi
 
