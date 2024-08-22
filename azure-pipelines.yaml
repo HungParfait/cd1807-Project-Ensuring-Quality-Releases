@@ -175,14 +175,14 @@ stages:
           #--------------------------------------------#
           # FakeRestAPI - Archive
           # ToDo: Complete the ArchiveFiles@2 task and publish step
-#          - task: ArchiveFiles@2
-#            displayName: "Archive FakeRestAPI"
-#            inputs:
-#              rootFolderOrFile: "$(System.DefaultWorkingDirectory)/output"
-#              includeRootFolder: false
-#              archiveType: "zip"
-#              archiveFile: "$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip"
-#          - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip
+          #          - task: ArchiveFiles@2
+          #            displayName: "Archive FakeRestAPI"
+          #            inputs:
+          #              rootFolderOrFile: "$(System.DefaultWorkingDirectory)/output"
+          #              includeRootFolder: false
+          #              archiveType: "zip"
+          #              archiveFile: "$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip"
+          #          - publish: $(Build.ArtifactStagingDirectory)/$(Build.BuildId)-fakerestapi.zip
           - publish: $(System.DefaultWorkingDirectory)/output/FakeRESTApi.Web.zip
             displayName: "Upload Package WebApp"
             artifact: drop-fakerestapi
@@ -238,22 +238,22 @@ stages:
                 - task: AzureWebApp@1
                   displayName: "Deploy Azure Web App"
                   inputs:
-                     azureSubscription: "$(azureServiceConnectionId)" # ToDo - Done
-                     appName: "$(app.name)" # ToDo - Done
-                     appType: webApp
-                     package: $(Pipeline.Workspace)/drop-fakerestapi/FakeRESTApi.Web.zip # ToDo: Use the published zip artifact. - Done
-                     deploymentMethod: 'auto'
-#                     deploymentMethod: 'runFromPackage'
-#                - task: AzureRmWebAppDeployment@4
-#                  inputs:
-#                    ConnectionType: 'AzureRM'
-#                    azureSubscription: 'MyConnection'
-#                    appType: 'webApp'
-#                    WebAppName: '$(app.name)'
-#                    packageForLinux: '$(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip'
-#                    enableCustomDeployment: true
-#                    DeploymentType: 'zipDeploy'
-#                    TakeAppOfflineFlag: false
+                    azureSubscription: "$(azureServiceConnectionId)" # ToDo - Done
+                    appName: "$(app.name)" # ToDo - Done
+                    appType: webApp
+                    package: $(Pipeline.Workspace)/drop-fakerestapi/FakeRESTApi.Web.zip # ToDo: Use the published zip artifact. - Done
+                    deploymentMethod: 'auto'
+                #                     deploymentMethod: 'runFromPackage'
+                #                - task: AzureRmWebAppDeployment@4
+                #                  inputs:
+                #                    ConnectionType: 'AzureRM'
+                #                    azureSubscription: 'MyConnection'
+                #                    appType: 'webApp'
+                #                    WebAppName: '$(app.name)'
+                #                    packageForLinux: '$(Pipeline.Workspace)/drop-fakerestapi/$(Build.BuildId)-fakerestapi.zip'
+                #                    enableCustomDeployment: true
+                #                    DeploymentType: 'zipDeploy'
+                #                    TakeAppOfflineFlag: false
 
                 #--------------------------------------------#
                 # Run JMeter test suite against the App Service
@@ -309,33 +309,33 @@ stages:
                       unzip -o $(Build.BuildId)-postman-tests.zip
                     workingDirectory: $(Pipeline.Workspace)/drop-postman-tests
 
-#                # Postman Data Validation Test Suite
-#                # ToDo: Verify the working directory - Done
-#                - task: CmdLine@2
-#                  displayName: Run Data Validation Tests
-#                  continueOnError: true
-#                  inputs:
-#                    script: "newman run Validation_Test.postman_collection.json -e Test.postman_environment.json --reporters cli,junit --reporter-junit-export TEST-DataValidation.xml"
-#                    workingDirectory: $(Pipeline.Workspace)/drop-postman-tests
-#
-#                # Postman Regression Test Suite
-#                # ToDo: Verify the working directory - Done
-#                - task: CmdLine@2
-#                  displayName: Run Regression Tests
-#                  continueOnError: true
-#                  inputs:
-#                    script: "newman run Regression_Test.postman_collection.json -e Test.postman_environment.json --reporters cli,junit --reporter-junit-export TEST-Regression.xml"
-#                    workingDirectory: $(Pipeline.Workspace)/drop-postman-tests
-#
-#                # Postman - Publish Results
-#                # ToDo: Complete the task as explained here: https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/test/publish-test-results?view=azure-devops&tabs=trx%2Cyaml#yaml-snippet
-#                - task: PublishTestResults@2
-#                  inputs:
-#                    testResultsFormat: "JUnit"
-#                    testResultsFiles: "**/TEST-*.xml"
-#                    searchFolder: $(Pipeline.Workspace)/drop-postman-tests # ToDo - Done
-#                    mergeTestResults: true
-#                    testRunTitle: "Testing" # ToDo - Done
+                # Postman Data Validation Test Suite
+                # ToDo: Verify the working directory - Done
+                - task: CmdLine@2
+                  displayName: Run Data Validation Tests
+                  continueOnError: true
+                  inputs:
+                    script: "newman run Validation_Test.postman_collection.json -e Test.postman_environment.json --reporters cli,junit --reporter-junit-export TEST-DataValidation.xml"
+                    workingDirectory: $(Pipeline.Workspace)/drop-postman-tests
+
+                # Postman Regression Test Suite
+                # ToDo: Verify the working directory - Done
+                - task: CmdLine@2
+                  displayName: Run Regression Tests
+                  continueOnError: true
+                  inputs:
+                    script: "newman run Regression_Test.postman_collection.json -e Test.postman_environment.json --reporters cli,junit --reporter-junit-export TEST-Regression.xml"
+                    workingDirectory: $(Pipeline.Workspace)/drop-postman-tests
+
+                # Postman - Publish Results
+                # ToDo: Complete the task as explained here: https://learn.microsoft.com/en-us/azure/devops/pipelines/tasks/test/publish-test-results?view=azure-devops&tabs=trx%2Cyaml#yaml-snippet
+                - task: PublishTestResults@2
+                  inputs:
+                    testResultsFormat: "JUnit"
+                    testResultsFiles: "**/TEST-*.xml"
+                    searchFolder: $(Pipeline.Workspace)/drop-postman-tests # ToDo - Done
+                    mergeTestResults: true
+                    testRunTitle: "Testing" # ToDo - Done
       #--------------------------------------------#
       # Selenium | Functional UI Tests
       # ToDo:
