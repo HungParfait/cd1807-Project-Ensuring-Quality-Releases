@@ -99,7 +99,7 @@ stages:
               workingDirectory: "$(System.DefaultWorkingDirectory)/terraform/environments/test"
               environmentServiceNameAzureRM: "$(azureServiceConnectionId)"
 
-          #          # Run Terraform Apply
+          #          # Run Terraform Applyx
           #          - task: TerraformTaskV3@3
           #            displayName: Terraform destroy
           #            inputs:
