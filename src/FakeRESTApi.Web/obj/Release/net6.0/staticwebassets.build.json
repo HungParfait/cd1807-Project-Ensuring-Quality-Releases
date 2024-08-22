@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "J8aRx4XqcZtUmy59IeGG5n9eur8owZAy+dOgIxsA+4Y=",
+  "Source": "FakeRESTApi.Web",
+  "BasePath": "_content/FakeRESTApi.Web",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
