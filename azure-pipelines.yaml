@@ -279,7 +279,7 @@ stages:
                     testResultsFiles: "**/TEST-*.xml"
                     searchFolder: $(Pipeline.Workspace)/drop-postman-tests # ToDo - Done
                     mergeTestResults: true
-                    testRunTitle: "Testing" # ToDo - Done
+                    testRunTitle: "Testing with Postman" # ToDo - Done
       #--------------------------------------------#
       # Selenium | Functional UI Tests
       # ToDo:
