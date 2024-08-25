@@ -322,6 +322,7 @@ stages:
                       sudo apt-get install unzip -y
                       sudo apt-get install -y chromium-browser
                       pip3 install selenium
+                      pip3 install webdriver-manager
                       cd ~/
                       DIR=/home/hungnd/app
                       if [ ! -d "$DIR" ]; then
@@ -332,8 +333,8 @@ stages:
                       unzip -o $(Build.BuildId)-uitests.zip
                       FILE=/home/hungnd/app/chromedriver_linux64.zip
                       if [ ! -f "$FILE" ]; then
-                          LATEST=$(wget -q -O - http://chromedriver.storage.googleapis.com/LATEST_RELEASE)
-                          wget http://chromedriver.storage.googleapis.com/$LATEST/chromedriver_linux64.zip
+                          LATEST=$(wget -q -O - https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+                          wget https://chromedriver.storage.googleapis.com/$LATEST/chromedriver_linux64.zip
                           unzip -o chromedriver_linux64.zip
                           sudo ln -s $PWD/chromedriver /usr/local/bin/chromedriver
                       fi
