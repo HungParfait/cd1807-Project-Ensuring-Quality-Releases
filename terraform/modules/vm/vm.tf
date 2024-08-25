@@ -27,7 +27,7 @@ resource "azurerm_linux_virtual_machine" "VM" {
   # source_image_id = var.source_image_id
   source_image_reference {
      publisher = "Canonical"
-     offer     = "UbuntuServer"
+     offer     = "0001-com-ubuntu-server-jammy"
      sku       = "22_04-lts"
      version   = "latest"
   }
