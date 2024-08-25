@@ -181,7 +181,10 @@ stages:
       # ToDo: Provide <environment name> you created in your DevOps project
       - deployment: FakeRestAPI
         pool: Pool
-        environment: $(environmentName) # ToDo
+        environment:
+          name: $(environmentName)
+          tags: dev
+          resourceType: virtualMachine
         strategy:
           runOnce:
             deploy:
