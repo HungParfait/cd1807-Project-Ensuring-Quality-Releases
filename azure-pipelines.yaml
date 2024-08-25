@@ -224,6 +224,19 @@ stages:
                       # ToDo: Write your commands
                     workingDirectory: $(Pipeline.Workspace)/drop-perftests # ToDo: Use the artifact name from the task above - Done
 
+                - task: ArchiveFiles@2
+                  displayName: "Archive JMeter Test Result"
+                  inputs:
+                    rootFolderOrFile: $(Pipeline.Workspace)/drop-perftests/log
+                    includeRootFolder: false
+                    archiveType: "zip"
+                    archiveFile: "$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-jmeter-results.zip"
+
+                # JMeter Test Suite - Publish Test Result
+                - publish: "$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-jmeter-results.zip"
+                  displayName: "Upload Package"
+                  artifact: drop-jmeter-results
+
                 - download: current
                   artifact: drop-postman-tests # ToDo: Change/provide a name - Done
 
@@ -285,9 +298,10 @@ stages:
       # ToDo:
       - deployment: VMDeploy
         displayName: Selenium Tests
-        environment: $(environmentName)
-        #          tags: dev
-        #          resourceType: "VirtualMachine"
+        environment:
+          name: $(environmentName)
+          tags: dev
+          resourceType: virtualMachine
         strategy:
           runOnce:
             deploy:

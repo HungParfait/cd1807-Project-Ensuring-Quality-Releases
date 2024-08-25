@@ -21,3 +21,4 @@ echo "STORAGE_ACCOUNT_NAME=$STORAGE_ACCOUNT_NAME"
 echo "CONTAINER_NAME=$CONTAINER_NAME"
 echo "ACCOUNT_KEY=$ACCOUNT_KEY"
 
+az vm create --resource-group Azuredevops --name Vm1 --location eastus --image Ubuntu2204 --size Standard_DS1_v2 --admin-username hungnd --admin-password @Tornaldo12x --authentication-type password --public-ip-sku Standard
