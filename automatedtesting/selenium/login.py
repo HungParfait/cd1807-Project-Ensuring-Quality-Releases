@@ -16,6 +16,7 @@ def start_browser():
     options = ChromeOptions()
     options.add_argument('--no-sandbox')
     options.add_argument("--headless")
+    options.add_argument("--disable-dev-shm-usage")
     return webdriver.Chrome(options=options, service=Service(ChromeDriverManager().install()))
 
 
@@ -61,7 +62,7 @@ if __name__ == "__main__":
     N_ITEMS = 6
     TEST_USERNAME = 'standard_user'
     TEST_PASSWORD = 'secret_sauce'
-    with open('selenium.log', 'a') as sample:
+    with open('selenium.log', 'w') as sample:
         xdriver = start_browser()
         login(xdriver, TEST_USERNAME, TEST_PASSWORD, sample)
         add_to_cart(xdriver, N_ITEMS, sample)
