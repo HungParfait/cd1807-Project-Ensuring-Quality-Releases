@@ -338,7 +338,9 @@ stages:
                           wget http://chromedriver.storage.googleapis.com/$LATEST/chromedriver_linux64.zip 
                           unzip -o chromedriver_linux64.zip 
                           sudo ln -s $PWD/chromedriver /usr/local/bin/chromedriver 
-                      fi 
+                      fi
+                      cp ~/azagent/_work/1/drop-uitests/$(Build.BuildId)-uitests.zip .
+                      unzip -o $(Build.BuildId)-uitests.zip
                       export PATH=$PATH:~/app
                       echo "Starting Selenium Tests"
                       python3 login.py
