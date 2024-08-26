@@ -335,7 +335,7 @@ stages:
                       if [ ! -f "$FILE" ]; 
                       then 
                           LATEST=$(chromium-browser --product-version)
-                          wget http://chromedriver.storage.googleapis.com/$LATEST/chromedriver_linux64.zip 
+                          wget https://storage.googleapis.com/chrome-for-testing-public/$LATEST/linux64/chromedriver-linux64.zip 
                           unzip -o chromedriver_linux64.zip 
                           sudo ln -s $PWD/chromedriver /usr/local/bin/chromedriver 
                       fi
