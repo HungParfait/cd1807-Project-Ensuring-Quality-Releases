@@ -229,17 +229,31 @@ stages:
                     workingDirectory: $(Pipeline.Workspace)/drop-perftests # ToDo: Use the artifact name from the task above - Done
 
                 - task: ArchiveFiles@2
-                  displayName: "Archive JMeter Test Result"
+                  displayName: "Archive JMeter Endurance Test Result"
                   inputs:
-                    rootFolderOrFile: $(Pipeline.Workspace)/drop-perftests/log
+                    rootFolderOrFile: $(Pipeline.Workspace)/drop-perftests/log/endurance-test-html-report
                     includeRootFolder: false
                     archiveType: "zip"
-                    archiveFile: "$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-jmeter-results.zip"
+                    archiveFile: "$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-jmeter-endurance-results.zip"
 
                 # JMeter Test Suite - Publish Test Result
-                - publish: "$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-jmeter-results.zip"
+                - publish: "$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-jmeter-endurance-results.zip"
                   displayName: "Upload Package"
                   artifact: drop-jmeter-results
+
+                - task: ArchiveFiles@2
+                  displayName: "Archive JMeter Stress Test Result"
+                  inputs:
+                    rootFolderOrFile: $(Pipeline.Workspace)/drop-perftests/log/stress-test-html-report
+                    includeRootFolder: false
+                    archiveType: "zip"
+                    archiveFile: "$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-jmeter-stress-results.zip"
+
+                # JMeter Test Suite - Publish Test Result
+                - publish: "$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-jmeter-stress-results.zip"
+                  displayName: "Upload Package"
+                  artifact: drop-jmeter-results
+
 
                 - download: current
                   artifact: drop-postman-tests # ToDo: Change/provide a name - Done
