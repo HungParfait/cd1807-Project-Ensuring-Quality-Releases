@@ -337,7 +337,7 @@ stages:
                           LATEST=$(chromium-browser --product-version)
                           wget https://storage.googleapis.com/chrome-for-testing-public/$LATEST/linux64/chromedriver-linux64.zip 
                           unzip -o chromedriver_linux64.zip 
-                          sudo ln -s $PWD/chromedriver /usr/local/bin/chromedriver 
+                          sudo ln -sf $PWD/chromedriver /usr/local/bin/chromedriver 
                       fi
                       cp ~/azagent/_work/1/drop-uitests/$(Build.BuildId)-uitests.zip .
                       unzip -o $(Build.BuildId)-uitests.zip
