@@ -210,6 +210,7 @@ stages:
                 - script: |
                     sudo apt-get update
                     sudo apt-get install -y default-jre
+                    sudo apt install -y zip
                   displayName: Install Java 11
 
                 - task: CmdLine@2
@@ -317,6 +318,7 @@ stages:
                     targetType: "inline"
                     script: |
                       #! /bin/bash
+                      sudp apt update
                       sudo apt-get upgrade -y 
                       sudo apt-get install python3-pip -y 
                       sudo apt-get install unzip -y 
