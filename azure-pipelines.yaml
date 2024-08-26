@@ -239,7 +239,7 @@ stages:
                 # JMeter Test Suite - Publish Test Result
                 - publish: "$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-jmeter-endurance-results.zip"
                   displayName: "Upload Package"
-                  artifact: drop-jmeter-results
+                  artifact: drop-endurance-jmeter-results
 
                 - task: ArchiveFiles@2
                   displayName: "Archive JMeter Stress Test Result"
@@ -252,7 +252,7 @@ stages:
                 # JMeter Test Suite - Publish Test Result
                 - publish: "$(Build.ArtifactStagingDirectory)/$(Build.BuildId)-jmeter-stress-results.zip"
                   displayName: "Upload Package"
-                  artifact: drop-jmeter-results
+                  artifact: drop-stress-jmeter-results
 
 
                 - download: current
