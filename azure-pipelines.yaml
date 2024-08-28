@@ -357,5 +357,5 @@ stages:
                       unzip -o $(Build.BuildId)-uitests.zip
                       export PATH=$PATH:~/app
                       echo "Starting Selenium Tests"
-                      python3 login.py
+                      python3 login.py >> selenium.log
                       echo "Completed Selenium Tests. Check selenium.log for results."
